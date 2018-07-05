@@ -1,45 +1,93 @@
-var path = require('path')
-var config = require('../config')
-var utils = require('./utils')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var env = config.build.env
+'use strict'
+const path = require('path')
+const utils = require('./utils')
+const webpack = require('webpack')
+const config = require('../config')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-var webpackConfig = merge(baseWebpackConfig, {
-  module: {
-    loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
+const env = require('../config/prod.env')
+
+const webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
+  performance: {
+    hints: false
   },
-  // 选择增强调试的开发工具
-  devtool: config.build.productionSourceMap ? '#source-map' : false,
-  // devtool: config.build.productionSourceMap ? '#nosources-source-map' : false,
+  module: {
+    rules: utils.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true,
+      usePostCSS: true
+    })
+  },
+  devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
-  vue: {
-    loaders: utils.cssLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true
-    })
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest'
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: config.build.productionSourceMap, // set to true if you want JS source maps,
+        uglifyOptions: {
+          warnings: false
+        }
+      }),
+      new OptimizeCSSPlugin({
+        cssProcessorOptions: config.build.productionSourceMap
+          ? { safe: true, map: { inline: false } }
+          : { safe: true }
+      }),
+    ],
+    splitChunks:{
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: false,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          priority: -10,
+          reuseExistingChunk: false,
+          test: /node_modules\/(.*)\.js/
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(scss|css)$/,
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
   },
   plugins: [
-    // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new webpack.DefinePlugin({
-      'process.env': env,
-      IS_PRODUCTION:true, //标识是否是生产环境
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     // extract css into its own file
-    new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
+    // new ExtractTextPlugin({
+    //   filename: utils.assetsPath('css/[name].[contenthash].css'),
+    //   allChunks: true,
+    // }),
+    new MiniCssExtractPlugin({
+      filename: 'css/app.[name].css',
+      chunkFilename: 'css/app.[contenthash:12].css'  // use contenthash *
+    }),
+
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
@@ -57,31 +105,23 @@ var webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module, count) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
+    // keep module.id stable when vendor modules does not change
+    new webpack.HashedModuleIdsPlugin(),
+    // enable scope hoisting
+
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
       }
-    }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
-    })
+    ])
   ]
 })
 
 if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -96,6 +136,11 @@ if (config.build.productionGzip) {
       minRatio: 0.8
     })
   )
+}
+
+if (config.build.bundleAnalyzerReport) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
 module.exports = webpackConfig

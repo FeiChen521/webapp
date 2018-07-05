@@ -77,6 +77,58 @@
                 <div class="bmBtn pull-right"><el-button type="primary" size="medium" @click="addUser = true">报名</el-button></div>
                 <div class="clearfix"></div>
               </el-card>
+              <el-card class="eventList">
+                <div class="eventImg pull-left"><img src="http://via.placeholder.com/160x110" class="image"></div>
+                <div class="rt pull-left">
+                  <ul>
+                    <li class="eventTitle"><a href="javascript:;">2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会</a></li>
+                    <li class="eventTime"><i class="fa fa-clock-o"></i>截止时间：2017-11-12 18:00</li>
+                    <li class="eventAddress"><i class="fa fa-map-marker"></i>地点：东方国际科技大厦</li>
+                    <li class="bmTime"><i class="fa fa-calendar-check-o"></i>报名时间：2017-11-03 12:00 - 2017-11-03 12:00</li>
+                  </ul>
+                </div>
+                <div class="bmBtn pull-right"><el-button type="primary" size="medium" @click="addUser = true">报名</el-button></div>
+                <div class="clearfix"></div>
+              </el-card>
+              <el-card class="eventList">
+                <div class="eventImg pull-left"><img src="http://via.placeholder.com/160x110" class="image"></div>
+                <div class="rt pull-left">
+                  <ul>
+                    <li class="eventTitle"><a href="javascript:;">2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会</a></li>
+                    <li class="eventTime"><i class="fa fa-clock-o"></i>截止时间：2017-11-12 18:00</li>
+                    <li class="eventAddress"><i class="fa fa-map-marker"></i>地点：东方国际科技大厦</li>
+                    <li class="bmTime"><i class="fa fa-calendar-check-o"></i>报名时间：2017-11-03 12:00 - 2017-11-03 12:00</li>
+                  </ul>
+                </div>
+                <div class="bmBtn pull-right"><el-button type="primary" size="medium" @click="addUser = true">报名</el-button></div>
+                <div class="clearfix"></div>
+              </el-card>
+              <el-card class="eventList">
+                <div class="eventImg pull-left"><img src="http://via.placeholder.com/160x110" class="image"></div>
+                <div class="rt pull-left">
+                  <ul>
+                    <li class="eventTitle"><a href="javascript:;">2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会</a></li>
+                    <li class="eventTime"><i class="fa fa-clock-o"></i>截止时间：2017-11-12 18:00</li>
+                    <li class="eventAddress"><i class="fa fa-map-marker"></i>地点：东方国际科技大厦</li>
+                    <li class="bmTime"><i class="fa fa-calendar-check-o"></i>报名时间：2017-11-03 12:00 - 2017-11-03 12:00</li>
+                  </ul>
+                </div>
+                <div class="bmBtn pull-right"><el-button type="primary" size="medium" @click="addUser = true">报名</el-button></div>
+                <div class="clearfix"></div>
+              </el-card>
+              <el-card class="eventList">
+                <div class="eventImg pull-left"><img src="http://via.placeholder.com/160x110" class="image"></div>
+                <div class="rt pull-left">
+                  <ul>
+                    <li class="eventTitle"><a href="javascript:;">2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会2018年第一季度协会学术大会</a></li>
+                    <li class="eventTime"><i class="fa fa-clock-o"></i>截止时间：2017-11-12 18:00</li>
+                    <li class="eventAddress"><i class="fa fa-map-marker"></i>地点：东方国际科技大厦</li>
+                    <li class="bmTime"><i class="fa fa-calendar-check-o"></i>报名时间：2017-11-03 12:00 - 2017-11-03 12:00</li>
+                  </ul>
+                </div>
+                <div class="bmBtn pull-right"><el-button type="primary" size="medium" @click="addUser = true">报名</el-button></div>
+                <div class="clearfix"></div>
+              </el-card>
             </el-col>
           </el-row>
           <div class="block pages">

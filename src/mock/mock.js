@@ -23,6 +23,18 @@ export default {
         }
       ]
     });
+    Mock.mock('/api/listpage', {
+      "array|10-100": [{
+        "date": '@date("yyyy-MM-dd")',
+        "name": "@cname", // 内容：npm安装后 mockjs/src/mock/random/xxx.js
+        "address":"@county(true)"
+      }]
+    });
+    Mock.mock('/api/getlistOptions',{
+      "array|5-10":[
+        {"name":"@cname","age":"@natural(10, 100)","like":"@cname"}
+      ]
+    })
     Mock.mock('/api/getOptions', {
       "code": "000",
       "datas|5-7": [

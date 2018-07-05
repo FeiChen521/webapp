@@ -2,7 +2,7 @@
   <section>
     <el-row class="con">
       <el-col :span="24">
-        <el-col :span="3"><a href="http://localhost:8082/#/database/renew/renew" target="_blank" class="btn">续费管理</a></el-col>
+        <el-col :span="3"><a href="http://localhost:8080/#/database/renew/renew" target="_blank" class="btn">续费管理</a></el-col>
       </el-col>
     </el-row>
   </section>
@@ -12,13 +12,11 @@
   export default {
     data() {
       return {
-        checked: 'true',
-        input: '',
-        radio: '1'
       }
     },
     mounted() {},
-    methods: {}
+    methods: {
+    }
   
   }
 </script>

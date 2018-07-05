@@ -27,7 +27,6 @@
       this.editor = UE.getEditor(this.id, this.config); // 初始化UE
       this.editor.addListener("ready", function () {
         _this.editor.setContent(_this.defaultMsg); // 确保UE加载完成后，放入内容。
-        console.log(1111, _this.defaultMsg)
       });
     },
     methods: {

@@ -5,8 +5,12 @@
     <v-menu></v-menu>
     <el-row>
       <el-col :span="24" class="box">
-        <!-- 局部组件使用 -->
-        <my-compoent></my-compoent>
+        <div class="test">
+          <div class="test-aaa">
+            <el-switch v-model="value1" on-text="开" off-text="关">
+        </el-switch>
+          </div>
+        </div>
       </el-col>
     </el-row>
   </section>
@@ -17,18 +21,11 @@
   import Header from '../../components/header/header'
   import Menu from '../../components/menu/menu.vue'
   
-  import Vue from "vue"
-  // 创建一个局部组件构造器
-  var myComponent = Vue.extend({
-    template: '<div>局部组件测试，我是局部组件的内容文字，上面的头部导航和左侧菜单是全局组件</div>'
-  })
-  // 注册组件 并指定组件的标签 局部组件的html标签为 my-compoent
-  Vue.component('my-compoent', myComponent)
-  
   export default {
     data() {
       return {
-        user: {}
+        user: {},
+        value1: true
       }
     }, // 全局组件注册
     components: {
@@ -41,5 +38,31 @@
 <style lang="scss" scoped>
   section {
     padding: 0;
+    .test {
+      border: 1px solid rgb(221, 221, 221);
+      border-radius: 3px;
+      padding: 10px;
+      &-aaa {
+        color: red;
+        margin-bottom: 20px;
+        font: {
+          family: 'Microsoft YaHei';
+          size: 14px;
+          weight: 700;
+        }
+      }
+      &:hover {
+        border-color: rgb(46, 173, 247);
+      }
+      .error {
+        border: 1px solid #f00;
+        background-color: #f0f0f0;
+        padding: 4px;
+      }
+      .seriousError {
+        @extend .error;
+        border-width: 3px;
+      }
+    }
   }
 </style>

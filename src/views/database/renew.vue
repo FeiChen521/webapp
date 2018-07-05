@@ -128,6 +128,8 @@
     padding: 0;
     .box {
       padding: 20px;
+      margin: 10px !important;
+      width: calc(100% - 220px);
       .el-card {
         box-shadow: none;
         border: none;
@@ -182,10 +184,10 @@
         .renew-page {
           margin-top: 20px;
           .el-input.title {
-            width: 460px;
+            width: 800px;
           }
           .edui-default .edui-editor {
-            width: 800px;
+            width: 800px !important;
           }
         }
       }
