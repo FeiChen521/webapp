@@ -18,6 +18,11 @@ npm run build
 npm run build --report
 ```
 
+
+npm run build 打包
+
+在server目录下启动node服务器
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # 本地运行如若出现问题，可执行下列命令尝试修复
